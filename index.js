@@ -1,5 +1,6 @@
 // apollo-serverモジュールを読み込む.
 const { ApolloServer } = require(`apollo-server`)
+const { GraphQLScalarType, astFromValue } = require(`graphql`)
 
 const typeDefs = `
   scalar DateTime
@@ -97,7 +98,8 @@ const resolvers = {
         postPhoto(parent, args) {
             var newPhoto = {
                 id: _id++,
-                ...args.input
+                ...args.input,
+                created: new Date()
             }
             photos.push(newPhoto)
             return newPhoto
@@ -121,7 +123,14 @@ const resolvers = {
             .filter(tag => tag.userID === parent.id)
             .map(tag => tag.photoID)
             .map(photoID => photos.find(p => p.id === photoID))
-    }
+    },
+    DateTime: new GraphQLScalarType({
+        name: `DateTime`,
+        description: `A valid date time value.`,
+        parseValue: value => new Date(value),
+        serialize: value => new Date(value).toISOString(),
+        parseLiteral: ast => ast.value
+    })
 }
 
 // サーバのインスタンスを作成.
