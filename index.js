@@ -22,7 +22,8 @@ const typeDefs = `
     url: String!
     name: String!
     description: String
-    category: PhotoCategory
+    category: PhotoCategory!
+    postedBy: User!
   }
 
   input PostPhotoInput {
