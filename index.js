@@ -10,6 +10,13 @@ const typeDefs = `
     GRAPHIC
   }
 
+  type User {
+    githubLogin: ID!
+    name: String
+    avatar: String
+    postedePhotos: [Photo!]!
+  }
+
   type Photo {
     id: ID!
     url: String!
