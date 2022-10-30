@@ -2,6 +2,8 @@
 const { ApolloServer } = require(`apollo-server`)
 
 const typeDefs = `
+  scalar DateTime
+
   enum PhotoCategory {
     SELFIE
     PORTRAIT
@@ -26,6 +28,7 @@ const typeDefs = `
     category: PhotoCategory!
     postedBy: User!
     taggedUsers: [User!]!
+    created: DateTime!
   }
 
   input PostPhotoInput {
