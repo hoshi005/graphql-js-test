@@ -46,9 +46,9 @@ var _id = 0
 
 // ユーザのサンプルデータ.
 var users = [
-    { "githubLogin": "mHattrup", "name": "Mike Hattrup" },
-    { "githubLogin": "gPlake", "name": "Glen Plake" },
-    { "githubLogin": "sSchmidt", "name": "Scot Schmidt" }
+    { "githubLogin": "mHattrup", "name": "錦木千束" },
+    { "githubLogin": "gPlake", "name": "井ノ上たきな" },
+    { "githubLogin": "sSchmidt", "name": "クルミ" }
 ]
 
 var photos = [
