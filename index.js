@@ -14,7 +14,7 @@ const typeDefs = `
     githubLogin: ID!
     name: String
     avatar: String
-    postedePhotos: [Photo!]!
+    postedPhotos: [Photo!]!
   }
 
   type Photo {
@@ -90,7 +90,15 @@ const resolvers = {
         }
     },
     Photo: {
-        url: parent => `http://photos.hoshi005.net/img/${parent.id}.jpg`
+        url: parent => `http://photos.hoshi005.net/img/${parent.id}.jpg`,
+        postedBy: parent => {
+            return users.find(u => u.githubLogin === parent.githubUser)
+        }
+    },
+    User: {
+        postedPhotos: parent => {
+            return photos.filter(p => p.githubUser === parent.githubLogin)
+        }
     }
 }
 
