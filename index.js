@@ -15,6 +15,7 @@ const typeDefs = `
     name: String
     avatar: String
     postedPhotos: [Photo!]!
+    inPhotos: [Photo!]!
   }
 
   type Photo {
@@ -24,6 +25,7 @@ const typeDefs = `
     description: String
     category: PhotoCategory!
     postedBy: User!
+    taggedUsers: [User!]!
   }
 
   input PostPhotoInput {
@@ -51,6 +53,7 @@ var users = [
     { "githubLogin": "sSchmidt", "name": "クルミ" }
 ]
 
+// 写真のデータ.
 var photos = [
     {
         "id": "1",
