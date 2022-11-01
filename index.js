@@ -1,5 +1,6 @@
 // apollo-serverモジュールを読み込む.
-const { ApolloServer } = require(`apollo-server`)
+const { ApolloServer } = require(`apollo-server-express`)
+const express = require(`express`)
 const { GraphQLScalarType, astFromValue } = require(`graphql`)
 
 const typeDefs = `
@@ -143,7 +144,18 @@ const server = new ApolloServer({
     resolvers
 })
 
+var app = express()
+
+// applyMiddlewareを呼び出し、Expressにミドルウェアを追加する.
+server.applyMiddleware({ app })
+
+// ホームルートを作成する.
+app.get(`/`, (req, res) => res.end(`Welcome to the PhotoShare API`))
+
+// 特定のポートでリッスンする.
+app.listen({ port: 4000 }, () => console.log(`GraphQL Server running @ http://localhost:4000${server.graphqlPath}`))
+
 // webサーバを起動.
-server
-    .listen()
-    .then(({ url }) => console.log(`GraphQL Service running on ${url}`))
+// server
+//     .listen()
+//     .then(({ url }) => console.log(`GraphQL Service running on ${url}`))
